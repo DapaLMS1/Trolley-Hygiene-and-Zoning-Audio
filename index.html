@@ -36,74 +36,80 @@
             color: #532A8C; /* brand-dark */
             font-weight: 500;
         }
+        /* Custom scrollbar for a cleaner look */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
     </style>
 </head>
-<body class="bg-brand-bg text-gray-800 min-h-screen p-4 md:p-8 antialiased flex justify-center items-start">
+<body class="bg-brand-bg text-gray-800 min-h-screen p-4 md:p-6 antialiased flex justify-center items-start">
 
-    <div class="max-w-7xl w-full mt-4 md:mt-10 flex flex-col lg:flex-row gap-12 lg:gap-20">
+    <!-- Constrained 600px width container -->
+    <div class="max-w-[600px] w-full flex flex-col gap-4 mt-2 md:mt-6">
         
-        <!-- Left Column: Audio Player (Sticky on Desktop) -->
-        <div class="lg:w-1/2 flex flex-col gap-4">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8 md:p-12 lg:sticky lg:top-10">
-                
-                <!-- Icon -->
-                <div class="w-20 h-20 bg-brand-light-purple/20 text-brand-dark rounded-full flex items-center justify-center mx-auto mb-8">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+        <!-- Top Section: Compact Audio Player (Sticky) -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-4 z-10 flex flex-col gap-3">
+            
+            <div class="flex items-center gap-3">
+                <!-- Smaller Icon -->
+                <div class="w-10 h-10 bg-brand-light-purple/20 text-brand-dark rounded-full flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
                 </div>
-
-                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4 text-center">Audio Lesson</h2>
-                <p class="text-base text-gray-500 mb-8 text-center max-w-sm mx-auto"><strong>Instructions:</strong> Listen to Annie explain the importance of trolley hygiene within the practice zones. You can optionally open the transcript to follow along.</p>
                 
-                <!-- Audio Element -->
-                <audio id="lesson-audio" controls class="w-full mb-6 h-14">
-                    <source src="Trolley Hygiene and Zoning Audio.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-
+                <!-- Condensed Header Text -->
+                <div>
+                    <h1 class="text-lg font-bold text-brand-dark leading-tight">Audio Lesson: Trolley Hygiene</h1>
+                    <p class="text-xs text-gray-500">Listen to Annie explain the importance of practice zones.</p>
+                </div>
             </div>
+            
+            <!-- Audio Element -->
+            <audio id="lesson-audio" controls class="w-full h-10 outline-none">
+                <source src="Trolley Hygiene and Zoning Audio.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+
         </div>
 
-        <!-- Right Column: Interactive Transcript (Collapsible) -->
-        <div class="lg:w-1/2 flex flex-col">
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-8">
-                
-                <!-- Toggle Header -->
-                <button onclick="toggleTranscript()" class="w-full flex justify-between items-center focus:outline-none group">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-brand-light-green/20 text-brand-green flex items-center justify-center">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                        </div>
-                        <h1 class="text-2xl font-bold text-brand-dark group-hover:text-[#3d1f66] transition-colors text-left">
-                            Interactive Transcript
-                        </h1>
-                    </div>
-                    <svg id="transcript-chevron" class="w-6 h-6 text-brand-muted transition-transform duration-300 transform rotate-0 shrink-0 ml-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                </button>
-
-                <!-- Transcript Content (Hidden by default) -->
-                <div id="transcript-content" class="hidden pt-6 mt-6 border-t border-gray-100">
-                    <div class="space-y-6 text-gray-700 text-base leading-relaxed" id="transcript">
-                        <p>
-                            <span class="sync-text text-gray-700" data-start="0.0" data-end="8.0">Trolleys act as highly mobile surfaces that travel continuously between sterile and contaminated clinical zones.</span> 
-                            <span class="sync-text text-gray-700" data-start="8.0" data-end="15.0">Without strict zoning and decontamination protocols, they can easily become primary vectors for cross-contamination.</span>
-                        </p>
-
-                        <p>
-                            <span class="sync-text text-gray-700" data-start="15.5" data-end="26.0">Collection trolleys, often referred to as "dirty" trolleys, are used exclusively to transport contaminated reusable medical devices from the surgery to the decontamination area.</span> 
-                            <span class="sync-text text-gray-700" data-start="26.5" data-end="34.0">Due to their high-risk payload, these trolleys must be thoroughly decontaminated immediately after every single transit.</span> 
-                            <span class="sync-text text-gray-700" data-start="34.5" data-end="42.0">Staff must use a medical-grade detergent or an approved disinfectant wipe to systematically clean all structural surfaces.</span> 
-                            <span class="sync-text text-gray-700" data-start="42.5" data-end="53.0">Meticulous attention must be paid to the handle grips and the undersides of the shelves, as these are common areas for unobserved splashes and bioburden to accumulate.</span>
-                        </p>
-
-                        <p>
-                            <span class="sync-text text-gray-700" data-start="53.5" data-end="65.0">Conversely, distribution or "clean" trolleys are dedicated strictly to moving clean, packaged items into the steriliser, or transporting fully sterilised items securely to the sterile storage facility.</span> 
-                            <span class="sync-text text-gray-700" data-start="65.5" data-end="75.5">To maintain environmental hygiene, these surfaces must be comprehensively cleaned at the conclusion of each clinical shift, or immediately if they become visibly soiled.</span> 
-                            <span class="sync-text text-gray-700" data-start="76.0" data-end="85.0">Furthermore, the wheels and casters on all trolleys must be routinely checked and cleared of entangled hair, suture material, and floor debris.</span> 
-                            <span class="sync-text text-gray-700" data-start="85.5" data-end="96.5">Impeded or sticky wheels require greater operator force to push, which significantly elevates the risk of manual handling injuries in the workplace.</span>
-                        </p>
-                    </div>
+        <!-- Bottom Section: Transcript (Accordion) -->
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 md:p-6">
+            
+            <!-- Toggle Header -->
+            <button onclick="toggleTranscript()" class="w-full flex justify-between items-center focus:outline-none group pb-3 border-b border-gray-100">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-brand-muted" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    <h2 class="text-sm font-bold text-gray-500 uppercase tracking-wider group-hover:text-brand-dark transition-colors">Interactive Transcript</h2>
                 </div>
+                <svg id="transcript-chevron" class="w-5 h-5 text-gray-400 transition-transform duration-300 transform rotate-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </button>
 
+            <!-- Transcript Content (Hidden by default) -->
+            <div id="transcript-content" class="hidden pt-4">
+                <!-- Smaller text (text-sm) to reduce scrolling -->
+                <div class="space-y-4 text-gray-700 text-sm leading-relaxed" id="transcript">
+                    <p>
+                        <span class="sync-text text-gray-700" data-start="0.0" data-end="7.5">Trolleys act as highly mobile surfaces that travel continuously between sterile and contaminated clinical zones.</span> 
+                    <span class="sync-text text-gray-700" data-start="33.5" data-end="41.5">Staff must use a medical-grade detergent or an approved disinfectant wipe to systematically clean all structural surfaces.</span> 
+                    <span class="sync-text text-gray-700" data-start="42.0" data-end="52.5">Meticulous attention must be paid to the handle grips and the undersides of the shelves, as these are common areas for unobserved splashes and bioburden to accumulate.</span>
+                </p>
+
+                <p>
+                    <span class="sync-text text-gray-700" data-start="53.0" data-end="65.5">Conversely, distribution or "clean" trolleys are dedicated strictly to moving clean, packaged items into the steriliser, or transporting fully sterilised items securely to the sterile storage facility.</span> 
+                    <span class="sync-text text-gray-700" data-start="66.0" data-end="76.0">To maintain environmental hygiene, these surfaces must be comprehensively cleaned at the conclusion of each clinical shift, or immediately if they become visibly soiled.</span> 
+                    <span class="sync-text text-gray-700" data-start="76.5" data-end="85.5">Furthermore, the wheels and casters on all trolleys must be routinely checked and cleared of entangled hair, suture material, and floor debris.</span> 
+                    <span class="sync-text text-gray-700" data-start="86.0" data-end="96.0">Impeded or sticky wheels require greater operator force to push, which significantly elevates the risk of manual handling injuries in the workplace.</span>
+                </p>
+            </div>
             </div>
         </div>
 
